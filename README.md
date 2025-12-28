@@ -10,7 +10,6 @@ A minimal command-line tool for formatting (_well behaved_) FORTRAN namelist fil
 4. [Usage](#usage)
 5. [Examples](#examples)
 6. [Contributing](#contributing)
-7. [License](#license)
 
 ## Capabilities
 
@@ -145,7 +144,3 @@ wind_v=  -3.
 ## Contributing
 
 Contributions are welcome! Feel to submit issues or pull requests.
-
-## License
-
-This is an open-source project. Feel free to use, modify, and distribute as needed.
