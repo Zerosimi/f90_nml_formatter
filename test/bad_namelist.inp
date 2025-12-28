@@ -1,0 +1,22 @@
+! global comment before anything
+
+ &ChEmIsTrY   
+ ,dt=60, 
+   species='NO2','HCHO',   "O3"
+ ,use_fast =.t.,
+ max_iter= 100 ,
+  threshold=1.0e-6   ! inline comment
+ ,rates =  1.0 ,2.0, 3.0
+ ,path=   ' /tmp/data '   ! spaces inside string are significant
+ ,empty_string='' ,
+  weird = .FALSE.
+ /
+
+ &meteo
+temp=280. 
+,pressure= 101325.,
+wind_u =5,
+  start_month                 =   06,   06,   06,
+wind_v=  -3.
+ flags = .false.,.true., .f.
+ /
