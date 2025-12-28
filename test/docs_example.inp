@@ -1,8 +1,8 @@
-! full line comment
+! line comment
 &NAMENAME
   variable_long_name = 10.5,
 
-! inline comment
+! line comment
 short = .TRUE.
   list = 1,2,3
 string = "hello world", ! inline comment
