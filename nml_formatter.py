@@ -26,12 +26,11 @@ def find_longest_key(content: str) -> int:
     It ignores comment lines and lines that do not contain assignments.
     """
     longest_key = -1
-    # Regex: optional comma, optional spaces/tabs, then group key (non-whitespace/non-=), optional spaces/tabs, =
-    pattern = re.compile(r"^[ \t]*,?[ \t]*([A-Za-z0-9_]+)[ \t]*=")
     for line in content.splitlines():
-        match = pattern.match(line)
-        if match:
-            key = match.group(1)
+        # Regex: Split on the first '=' with optional whitespace, allow leading comma
+        eq_match = re.match(r"\s*,?\s*([^\s=]+)\s*=+(.*)", line)
+        if eq_match:
+            key = eq_match.group(1)
             if len(key) > longest_key:
                 longest_key = len(key)
     return longest_key
