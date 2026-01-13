@@ -238,12 +238,24 @@ def format_nml(
 if __name__ == "__main__":
     # CLI parser configuration
     parser = argparse.ArgumentParser(
-        description="Format a FORTRAN namelist file in place.",
+        description=(
+            "Format a FORTRAN namelist file. To avoid formatting in place "
+            "use --output option."
+        ),
     )
     parser.add_argument(
         "namelist",
         type=pathlib.Path,
         help="Path to the FORTRAN namelist file to format",
+    )
+    parser.add_argument(
+        "--output",
+        type=pathlib.Path,
+        default=None,
+        help=(
+            "Optional output path. "
+            "If not given, the input namelist is overwritten in place."
+        ),
     )
     parser.add_argument(
         "--block-indentation",
@@ -293,5 +305,12 @@ if __name__ == "__main__":
         keep_whitelines=args.keep_whitelines,
     )
 
-    # Replace old one
-    args.namelist.write_text(formatted_lines, encoding="utf-8")
+    # Safety check
+    if args.output is not None and args.output.resolve() == args.namelist.resolve():
+        raise ValueError("Output path cannot be identical to namelist path.")
+
+    # Determine output path
+    output_path = args.output if args.output is not None else args.namelist
+
+    # Write result
+    output_path.write_text(formatted_lines, encoding="utf-8")

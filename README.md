@@ -1,6 +1,10 @@
 # f90_nml_formatter
 
-A minimal command-line tool for formatting (_well behaved_) FORTRAN namelist files. `f90_nml_formatter` formats a namelist in in place to ensure readable and consistent namelists. It offers a few customization options.
+A minimal command-line tool for formatting (_well behaved_) FORTRAN namelist files. `f90_nml_formatter` formats a namelist to ensure readable and consistent namelists. 
+
+The tool is based on a regular expression (`\s*,?\s*([^\s=]+)\s*=+(.*)`) for parsing a valid line of a namelist. This means it will not work for any namelist in the wild, but for most well behaved ones.
+
+It offers a few customization options. The default behaviour is formatting the namelist in place.
 
 ## Table of contents
 
@@ -31,7 +35,7 @@ A minimal command-line tool for formatting (_well behaved_) FORTRAN namelist fil
 
 ## Requirements
 
-* **Python 3.9+** (uses modern type hinting syntax `tuple[str, str, str]`)
+* **Python 3.9.0** or newer as the tool uses modern type hinting syntax
 
 ## Usage
 
@@ -49,6 +53,7 @@ positional arguments:
 
 optional arguments:
   -h, --help            Show help message and exit
+  --output path         Optional output path. If not given, the input namelist is overwritten in place.
   --block-indentation N Number of spaces to indent variables inside a block (default: 2)
   --eq-offset N         Number of spaces after longest key before the '=' sign (default: 5)
   --no-trailing-comma   Remove trailing commas at end of assignments (default: keep them)
