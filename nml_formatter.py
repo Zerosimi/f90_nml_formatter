@@ -22,17 +22,21 @@ def find_longest_key(content: str) -> int:
 
     Notes
     -----
-    This function uses a regular expression to identify lines containing key-value pairs.
+    This function uses `parse_key_val_pair` to identify lines containing key-value pairs.
     It ignores comment lines and lines that do not contain assignments.
     """
     longest_key = -1
     for line in content.splitlines():
-        # Regex: Split on the first '=' with optional whitespace, allow leading comma
-        eq_match = re.match(r"\s*,?\s*([^\s=]+)\s*=+(.*)", line)
-        if eq_match:
-            key = eq_match.group(1)
-            if len(key) > longest_key:
-                longest_key = len(key)
+        # Parse line
+        try:
+            key, _, _ = parse_key_val_pair(line)
+        except ValueError:
+            continue
+
+        # Overwrite longest key
+        if len(key) > longest_key:
+            longest_key = len(key)
+
     return longest_key
 
 
@@ -109,10 +113,7 @@ def format_line(
     str
         The line formatted according to the specified options.
     """
-    TRUE_REPR = [
-        ".t.",
-        ".TRUE.",
-    ]
+    TRUE_REPR = [".t.", ".TRUE."]
     FALSE_REPR = [".f.", ".FALSE."]
 
     # Parse line into key, value, and comment
