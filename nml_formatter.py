@@ -1,4 +1,4 @@
-"""This script formats FORTRAN namelist in place"""
+"""This script formats FORTRAN namelist"""
 
 import pathlib
 import argparse

@@ -31,7 +31,6 @@ It offers a few customization options. The default behaviour is formatting the n
 
 * No validation of a namelist syntax
 * No handling of line continuations
-* In place modification
 
 ## Requirements
 
